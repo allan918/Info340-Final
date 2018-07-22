@@ -27,7 +27,7 @@ Table Clinics (
 	ClinicID int  Primary Key Identity(1,1)
 ,	ClinicName nVarchar(100) Not Null Unique
 ,	ClinicPhoneNumber nVarchar(100) Not Null Check (ClinicPhoneNumber like
-	 '([0-9][0-9][0-9])-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
+	 '[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
 ,	ClinicAddress nVarchar(100) Not Null
 ,	ClinicCity nVarchar(100) Not Null
 ,	ClinicState nChar(2) Not Null
@@ -42,7 +42,7 @@ Table Doctor(
 ,	DoctorFirstName nVarChar(100) Not Null
 ,	DoctorLastName nVarChar(100) Not Null
 ,	DoctorPhoneNumber nVarChar(100)	Not Null Check (DoctorPhoneNumber like
-	 '([0-9][0-9][0-9])-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
+	 '[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
 ,	DoctorStreet nVarChar(100) Not Null
 ,	DoctorCity nVarChar(100) Not Null
 ,	DoctorState nChar(2) Not Null
@@ -62,7 +62,7 @@ Create Table Patient (
 ,	PatientFirstName nVarChar(100)	Not Null
 ,	PatientLastName	nVarChar(100)	Not Null
 ,	PatientPhoneNumber nVarChar(100)	Not Null Check (PatientPhoneNumber like
-	 '([0-9][0-9][0-9])-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
+	 '[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
 ,	PatientStreet nVarChar(100)	Not Null
 ,	PatientCity	nVarChar(100)	Not Null
 ,	PatientState nChar(2)	Not Null
@@ -111,7 +111,7 @@ Select * From
 Clinics
 Go
 
-Create View vOverall
+Create View vAppointmentsByPatientsDoctorsAndClinics
 as
 Select 
 	 c.ClinicID
@@ -152,9 +152,6 @@ Join Clinics as c
 on d.ClinicID = c.ClinicID
 Go
 
-
-
-
 Select * From vAppointment;
 Go
 Select * From vClinics;
@@ -163,7 +160,7 @@ Select * From vDoctor;
 Go
 Select * From vPatient;
 Go
-Select * From vOverall;
+Select * From vAppointmentsByPatientsDoctorsAndClinics;
 Go
 -- 4) Create the stored procedures ---------------------------------------------
 Create Procedure pInsDoctor
@@ -714,14 +711,14 @@ Deny Select, Update, Delete, Insert on Clinics to Public;
 Go
 
 Grant
-Select on vOverall to Public;
+Select on vAppointmentsByPatientsDoctorsAndClinics to Public;
 
 -- 6) Test the views and stored procedures -------------------------------------
 Declare @Status int, @ClinicID int; 
 Exec @Status = pInsClinics
 	 @ClinicID	= @ClinicID out
 	,@ClinicName	= 'abc'
-	,@ClinicPhoneNumber	= '(610)-570-6768'
+	,@ClinicPhoneNumber	= '610-570-6768'
 	,@ClinicAddress	= 'a'
 	,@ClinicCity	= 'Seattle'
 	,@ClinicState	= 'WA'
@@ -738,7 +735,7 @@ Exec @Status = pInsDoctor
 		 @DoctorID = @DoctorID out
 		,@DoctorFirstName = 'a'
 		,@DoctorLastName	= 'b'
-		,@DoctorPhoneNumber = '(619)-570-6745'
+		,@DoctorPhoneNumber = '619-570-6745'
 		,@DoctorStreet	= 'asdasfaffa'
 		,@DoctorCity	= 'asd'
 		,@DoctorState	= 'wa'
@@ -758,7 +755,7 @@ Exec @Status = pInsPatient
 		 @PatientID = @PatientID out
 		,@PatientFirstName = 'a'
 		,@PatientLastName	= 'b'
-		,@PatientPhoneNumber = '(619)-570-6745'
+		,@PatientPhoneNumber = '619-570-6745'
 		,@PatientStreet	= 'asdasfaffa'
 		,@PatientCity	= 'asd'
 		,@PatientState	= 'wa'
@@ -798,14 +795,14 @@ Select * From vDoctor;
 Go
 Select * From vPatient;
 Go
-Select * From vOverall;
+Select * From vAppointmentsByPatientsDoctorsAndClinics;
 Go
 
 Declare @Status int;
 Exec @Status = pUpdClinics
 	 @ClinicID	= 1
 	,@ClinicName	= 'Changed'
-	,@ClinicPhoneNumber	= '(610)-570-6768'
+	,@ClinicPhoneNumber	= '610-570-6768'
 	,@ClinicAddress	= 'a'
 	,@ClinicCity	= 'Seattle'
 	,@ClinicState	= 'WA'
@@ -821,7 +818,7 @@ Exec @Status = pUpdDoctor
 		 @DoctorID = 1
 		,@DoctorFirstName = 'changed'
 		,@DoctorLastName	= 'bv'
-		,@DoctorPhoneNumber = '(619)-590-6745'
+		,@DoctorPhoneNumber = '619-590-6745'
 		,@DoctorStreet	= 'asda'
 		,@DoctorCity	= 'asdd'
 		,@DoctorState	= 'PA'
@@ -838,7 +835,7 @@ Exec @Status = pUpdPatient
 		 @PatientID = 1
 		,@PatientFirstName = 'changed'
 		,@PatientLastName	= 'b'
-		,@PatientPhoneNumber = '(619)-570-6745'
+		,@PatientPhoneNumber = '619-570-6745'
 		,@PatientStreet	= 'asdasfaffa'
 		,@PatientCity	= 'asd'
 		,@PatientState	= 'wa'

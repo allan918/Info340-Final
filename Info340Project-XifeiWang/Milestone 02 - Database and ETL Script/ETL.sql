@@ -2129,5 +2129,5 @@ Select * From vDoctor;
 Go
 Select * From vPatient;
 Go
-Select * From vOverall;
+Select * From vAppointmentsByPatientsDoctorsAndClinics;
 Go
