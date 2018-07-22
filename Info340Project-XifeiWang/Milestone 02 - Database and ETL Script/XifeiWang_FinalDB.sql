@@ -3,7 +3,8 @@
 -- Author:Xifei Wang
 -- Desc: This file is used to create a database for the Final
 -- Change Log: When,Who,What
--- 2017-01-01,XifeiWang,Created File
+-- 2018-07-21,XifeiWang,Created File
+-- Class: Info 340
 --**************************************************************************--
 -- Step 1: Create the Lab database
 Use Master;

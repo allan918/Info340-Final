@@ -1,3 +1,12 @@
+--*************************************************************************--
+-- Title: Module08-Milestone02
+-- Author:Xifei Wang
+-- Desc: This file is used to insert fake data from Mockaroo
+-- Change Log: When,Who,What
+-- 2018-07-21,XifeiWang,Created File
+-- Class: Info 340
+--**************************************************************************--
+
 Use MyLabsDB_XifeiWang;
 Go
 -- Clinics table
@@ -1118,6 +1127,7 @@ insert into Patient (PatientFirstName, PatientLastName, PatientPhoneNumber, Pati
 insert into Patient (PatientFirstName, PatientLastName, PatientPhoneNumber, PatientStreet, PatientCity, PatientState, PatientZipCode, PatientGender) values ('Ardra', 'Hegg', '253-891-7167', '2 Prentice Way', 'Tacoma', 'WA', '98464', 'F');
 insert into Patient (PatientFirstName, PatientLastName, PatientPhoneNumber, PatientStreet, PatientCity, PatientState, PatientZipCode, PatientGender) values ('Cesar', 'Entres', '248-698-4712', '584 Luster Lane', 'Farmington', 'MI', '48335', 'M');
 insert into Patient (PatientFirstName, PatientLastName, PatientPhoneNumber, PatientStreet, PatientCity, PatientState, PatientZipCode, PatientGender) values ('Joshia', 'Endacott', '254-403-6802', '629 Lakewood Gardens Court', 'Gatesville', 'TX', '76598', 'M');
+Go
 
 -- insert appointment
 insert into Appointment (AppointmentTime, AppointmentStreet, AppointmentCity, AppointmentState, AppointmentZipCode, DoctorID, PatientID) values ('2018-04-01 22:16:44', '4867 Bluestem Place', 'Minneapolis', 'MN', '55480', 84, 415);
